@@ -3,15 +3,12 @@ package ru.practikum.yandex.pageobject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // TODO Разбить класс на 2. 1 - для тестирования попапов, 2 - для тестирования заказа самоката
 public class SamokatPageObject {
     //URL адрес страницы ЯндексСамокат
     private static final String ORDER_URL = "https://qa-scooter.praktikum-services.ru/";
     //нажимаем на на закрытие всплывающего окна
-    private static final By CLICK_ON_BUTTON = By.className("App_CookieButton__3cvqF");
+    private static final By CLOSE_POPUP_WINDOW = By.className("App_CookieButton__3cvqF");
     //Нажать кнопку 'заказать' вверху
     private static final By ORDER_BUTTON = By.xpath("//*[@id=\"root\"]//div[2]/button['Заказать']");
     //Нажать кнопку заказать внизу
@@ -55,28 +52,21 @@ public class SamokatPageObject {
         driver.get(ORDER_URL);
     }
 
-
-
-    public String orderSamokatForFirstUser(UserData userData) {
-        driver.findElement(CLICK_ON_BUTTON).click();
+    public String orderSamokatForFirstScenario(UserData userData) {
+        driver.findElement(CLOSE_POPUP_WINDOW).click();
         driver.findElement(ORDER_BUTTON).click();
         prepareUser(userData);
-        driver.findElement(FURTHER_BUTTON).click();
-        driver.findElement(DATE).click();
-        driver.findElement(DATE_SELECT).click(); //выбо даты
-        driver.findElement(RENTAL_PERIOD).click();
-        driver.findElement(RENTAL_PERIOD_PER_DAY).click(); //сутки
-        driver.findElement(SELECT_COLOR).click();//черный жемчуг
-        driver.findElement(ORDER_BUTTON_CLICK).click();//нажимаем на кнопку заказать
-        driver.findElement(YES_BUTTON_CLICK).click();// нажимаем кнопку ДА
-        String content = driver.findElement(By.xpath("/html/body/div/div/div[2]/div[5]/div[1]")).getText();
-        return content.split("\n")[0];
+        return orderSamokat();
     }
 
-    public String orderSamokatForSecondUser(UserData userData) {
-        driver.findElement(CLICK_ON_BUTTON).click();
+    public String orderSamokatForSecondScenario(UserData userData) {
+        driver.findElement(CLOSE_POPUP_WINDOW).click();
         driver.findElement(ORDER_BUTTON_LOWER).click();
         prepareUser(userData);
+        return orderSamokat();
+    }
+
+    private String orderSamokat() {
         driver.findElement(FURTHER_BUTTON).click();
         driver.findElement(DATE).click();
         driver.findElement(DATE_SELECT).click(); //выбо даты
@@ -85,8 +75,7 @@ public class SamokatPageObject {
         driver.findElement(SELECT_COLOR).click();//черный жемчуг
         driver.findElement(ORDER_BUTTON_CLICK).click();//нажимаем на кнопку заказать
         driver.findElement(YES_BUTTON_CLICK).click();// нажимаем кнопку ДА
-        String content = driver.findElement(By.xpath("/html/body/div/div/div[2]/div[5]/div[1]")).getText();
-
+        String content = driver.findElement(By.className("Order_ModalHeader__3FDaJ")).getText();
         return content.split("\n")[0];
     }
 

@@ -19,17 +19,17 @@ public class SamokatOrderTest {
     }
 
     @Test
-    public void checkSamokatOrderForFirstUserTest() {
+    public void checkSamokatOrderForFirstScenarioTest() {
         UserData firstUser = new UserData("Никита", "Митин", "Смольная 27", "Сокол", "+9850418739");
-        String displayContent = samokatPageObject.orderSamokatForFirstUser(firstUser);
+        String displayContent = samokatPageObject.orderSamokatForFirstScenario(firstUser);
         String elementOrder = "Заказ оформлен";
         Assert.assertEquals(elementOrder, displayContent);
     }
 
     @Test
-    public void checkSamokatOrderForSecondUserTest() {
+    public void checkSamokatOrderForSecondScenarioTest() {
         UserData secondUser = new UserData("Антон", "Михеев", "Кутузовская 66", "Черкизовская", "+9857495063");
-        String displayContent = samokatPageObject.orderSamokatForSecondUser(secondUser);
+        String displayContent = samokatPageObject.orderSamokatForSecondScenario(secondUser);
         String elementOrder = "Заказ оформлен";
         Assert.assertEquals(elementOrder, displayContent);
     }
