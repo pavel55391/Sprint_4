@@ -3,7 +3,7 @@ package ru.practikum.yandex.pageobject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-// TODO Разбить класс на 2. 1 - для тестирования попапов, 2 - для тестирования заказа самоката
+
 public class SamokatPageObject {
     //URL адрес страницы ЯндексСамокат
     private static final String ORDER_URL = "https://qa-scooter.praktikum-services.ru/";
@@ -34,47 +34,65 @@ public class SamokatPageObject {
     //Выбор цвета
     private static final By SELECT_COLOR = By.xpath("//*[@id=\"root\"]/div//div[3]/label[1]");
     //Нажать кнопку "Заказать"
-    private static final By ORDER_BUTTON_CLICK = By.cssSelector("div > div.Order_Buttons__1xGrp > button:nth-child(2)");
+    private static final By BUTTON_ORDER = By.cssSelector("div > div.Order_Buttons__1xGrp > button:nth-child(2)");
     //Нажать кнопку "ДА"
-    private static final By YES_BUTTON_CLICK = By.cssSelector("div > div.Order_Modal__YZ-d3 > div.Order_Buttons__1xGrp > button:nth-child(2)");
-
-
-
+    private static final By YES_BUTTON = By.cssSelector("div > div.Order_Modal__YZ-d3 > div.Order_Buttons__1xGrp > button:nth-child(2)");
     //Срок аренды
     private static final By RENTAL_PERIOD = By.xpath("//div/div[2]/div[2]/div[2]");
 
-
-
-    public WebDriver driver;
+    private WebDriver driver;
 
     public SamokatPageObject(WebDriver driver) {
         this.driver = driver;
         driver.get(ORDER_URL);
     }
 
-    public String orderSamokatForFirstScenario(UserData userData) {
+    public String orderSamokatThroughtUpperButton(UserData userData) {
+        closePopup();
+        orderSamokatUpperButton();
+        prepareUser(userData);
+        enterUserData();
+        enterOrderData();
+        return orderSamokat();
+    }
+
+    public String orderSamokatThroughtLowerButton(UserData userData) {
+        closePopup();
+        orderSamokatLowerButton();
+        prepareUser(userData);
+        enterUserData();
+        enterOrderData();
+        return orderSamokat();
+    }
+
+    private void closePopup() { //закрыть всплывающее окно
         driver.findElement(CLOSE_POPUP_WINDOW).click();
+    }
+
+    private void orderSamokatUpperButton() { // нажать кнопку заказать вверху
         driver.findElement(ORDER_BUTTON).click();
-        prepareUser(userData);
-        return orderSamokat();
-    }
-
-    public String orderSamokatForSecondScenario(UserData userData) {
-        driver.findElement(CLOSE_POPUP_WINDOW).click();
-        driver.findElement(ORDER_BUTTON_LOWER).click();
-        prepareUser(userData);
-        return orderSamokat();
-    }
-
-    private String orderSamokat() {
         driver.findElement(FURTHER_BUTTON).click();
+    }
+
+    private void orderSamokatLowerButton() { //нажать кнопку заказать внизу
+        driver.findElement(ORDER_BUTTON_LOWER).click();
+    }
+
+    private void enterUserData() {
+        driver.findElement(FURTHER_BUTTON).click();
+    }
+
+    private void enterOrderData() {
         driver.findElement(DATE).click();
         driver.findElement(DATE_SELECT).click(); //выбо даты
         driver.findElement(RENTAL_PERIOD).click();
         driver.findElement(RENTAL_PERIOD_PER_DAY).click(); //сутки
         driver.findElement(SELECT_COLOR).click();//черный жемчуг
-        driver.findElement(ORDER_BUTTON_CLICK).click();//нажимаем на кнопку заказать
-        driver.findElement(YES_BUTTON_CLICK).click();// нажимаем кнопку ДА
+        driver.findElement(BUTTON_ORDER).click();//нажимаем на кнопку заказать
+        driver.findElement(YES_BUTTON).click();// нажимаем кнопку ДА
+    }
+
+    private String orderSamokat() {
         String content = driver.findElement(By.className("Order_ModalHeader__3FDaJ")).getText();
         return content.split("\n")[0];
     }

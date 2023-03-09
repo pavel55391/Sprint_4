@@ -47,45 +47,39 @@ public class PopupPageObject {
         public PopupPageObject(WebDriver driver) {
             this.driver = driver;
             driver.get(ORDER_URL);
+            driver.findElement(CLOSE_POPUP_WINDOW).click();
         }
 
-        public String clickOnListElement_1() {
-            driver.findElement(CLOSE_POPUP_WINDOW).click();
+        public String clickOnListElementPriceList() {
             driver.findElement(QUESTION_PRICE_LIST).click();
             return driver.findElement(ANSWER_PRICE_LIST).getText();
         }
-        public String clickOnListElement_2() {
-            driver.findElement(CLOSE_POPUP_WINDOW).click();
+        public String clickOnListElementSeveralSamocat() {
+            //driver.findElement(CLOSE_POPUP_WINDOW).click();
             driver.findElement(QUESTION_ORDER_SEVERAL_SAMOCAT).click();
             return driver.findElement(ANSWER_ORDER_SEVERAL_SAMOCAT).getText();
         }
-        public String clickOnListElement_3() {
-            driver.findElement(CLOSE_POPUP_WINDOW).click();
+        public String clickOnListElementRentalTime() {
             driver.findElement(QUESTION_RENTAL_TIME).click();
             return driver.findElement(ANSWER_RENTAL_TIME).getText();
         }
-        public String clickOnListElement_4() {
-            driver.findElement(CLOSE_POPUP_WINDOW).click();
+        public String clickOnListElementOrderSamokatToday() {
             driver.findElement(QUESTION_ORDER_SAMOCAT_TODAY).click();
             return driver.findElement(ANSWER_ORDER_SAMOCAT_TODAY).getText();
         }
-        public String clickOnListElement_5() {
-            driver.findElement(CLOSE_POPUP_WINDOW).click();
+        public String clickOnListElementExtendLeaseSamokat() {
             driver.findElement(QUESTION_EXTEND_LEASE_SAMOCAT).click();
             return driver.findElement(ANSWER_EXTEND_LEASE_SAMOCAT).getText();
         }
-        public String clickOnListElement_6() {
-            driver.findElement(CLOSE_POPUP_WINDOW).click();
+        public String clickOnListElementChargingSamocat() {
             driver.findElement(QUESTION_CHARGING_TOGETHER_WITH_SAMOCAT).click();
             return driver.findElement((ANSWER_CHARGING_TOGETHER_WITH_SAMOCAT)).getText();
         }
-        public String clickOnListElement_7() {
-            driver.findElement(CLOSE_POPUP_WINDOW).click();
+        public String clickOnListElementCancelOrder() {
             driver.findElement(QUESTION_CANCEL_ORDER).click();
             return driver.findElement((ANSWER_CANCEL_ORDER)).getText();
         }
-        public String clickOnListElement_8() {
-            driver.findElement(CLOSE_POPUP_WINDOW).click();
+        public String clickOnListElementDeliverySamocat() {
             driver.findElement(QUESTION_DELIVERY_SAMOCAT).click();
             return driver.findElement((ANSWER_DELIVERY_SAMOCAT)).getText();
         }

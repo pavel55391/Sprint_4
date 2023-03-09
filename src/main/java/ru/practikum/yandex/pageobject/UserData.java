@@ -1,11 +1,11 @@
 package ru.practikum.yandex.pageobject;
 
 public class UserData {
-    String name;
-    String surname;
-    String address;
-    String metroStation;
-    String phoneNumber;
+    private String name;
+    private String surname;
+    private String address;
+    private String metroStation;
+    private String phoneNumber;
 
     public UserData() {
     }
